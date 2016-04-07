@@ -1,21 +1,21 @@
 {
 	"name": "node-jpath",
 	"description": "jPath: Traversal utility to help you digg deeper into complex objects or arrays of objects",
-	"version": "2.1.0",
+	"version": "0.1",
 	"author": {
-		"name": "Simon Tsvilik",
-		"email": "webdevsimon@gmail.com"
+		"name": "Matt Johnson",
+		"email": "mdj1979@gmail.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/stsvilik/node-jpath.git"
+		"url": "git://github.com/mcmlxxix/node-jpath.git"
 	},
 	"bugs": {
-		"url": "https://github.com/stsvilik/node-jpath/issues"
+		"url": "https://github.com/mcmlxxix/node-jpath/issues"
 	},
 	"licenses": [{
 		"type": "MIT",
-		"url": "https://github.com/stsvilik/node-jpath/blob/master/LICENSE-MIT"
+		"url": "https://github.com/mcmlxxix/node-jpath/blob/master/LICENSE-MIT"
 	}],
 	"main": "./lib/node-jpath",
 	"keywords": ["utility", "xpath", "jpath", "traversal", "objects"]
