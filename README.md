@@ -9,7 +9,8 @@ This is a pretty extensive modification of the original node-jpath code, but I a
 The filter() method has been removed as there is no longer a JPath class to speak of, and the response structure has changed a bit to make navigation through the object tree possible for writes/updates:
 
 EXAMPLE (corresponds to the first example listed below):
-{path:"people", key:"1", value:{name: "Steve", age:24, gender:"male"}}
+
+	{path:"people", key:"1", value:{name: "Steve", age:24, gender:"male"}}
 
 ====
 Utility library to help you traverse and filter out data from complex JSON and or Arrays of objects.
