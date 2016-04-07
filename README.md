@@ -1,5 +1,17 @@
 node-jPath
 ====
+Forked from https://github.com/stsvilik/node-jpath
+
+#### Changes
+
+This is a pretty extensive modification of the original node-jpath code, but I am leaving it as a fork, because for the most part the logic is the same, and some of those regular expressions are... impressive. I have adapted the library to support writing/updating objects/properties.
+
+The filter() method has been removed as there is no longer a JPath class to speak of, and the response structure has changed a bit to make navigation through the object tree possible for writes/updates:
+
+EXAMPLE (corresponds to the first example listed below):
+{path:"people", key:"1", value:{name: "Steve", age:24, gender:"male"}}
+
+====
 Utility library to help you traverse and filter out data from complex JSON and or Arrays of objects.
 The strength of this library lies in ability to use XPath-like expressions to retrieve data you need.
 
@@ -28,25 +40,25 @@ jPath is a recursive scanner that processes each token of your pattern at a time
 		]
 	};
 	//We want to get all males younger then 25
-	var match = jpath.filter(jsonData, "people[gender=male && age < 25]");
+	var match = jpath.select(jsonData, "people[gender=male && age < 25]");
 
 	Output:
 	[{name: "Steve", age:24, gender:"male"}]
 
 	//Now lets try to get people that have a 5 letter name
-	var match = jpath.filter(jsonData, "people[name.length == 5]");
+	var match = jpath.select(jsonData, "people[name.length == 5]");
 
 	Output:
 	[{name: "Steve", age:24, gender:"male"},{name: "Susan", age:22, gender:"female"},{name: "Linda", age:30, gender:"female"}]
 
 	//I want to get only names of people as an array of strings
-	var match = jpath.filter(jsonData, "people.name");
+	var match = jpath.select(jsonData, "people.name");
 
 	Output:
 	["John", "Steve", "Susan", "Linda", "Adam"]
 
 	//I need to get people that have gender (in our case all of them will, but in case field is missing this operation is useful)
-	var match = jpath.filter(jsonData, "people[gender != undefined]");
+	var match = jpath.select(jsonData, "people[gender != undefined]");
 
 
 #### Does it support conditions?
@@ -57,7 +69,8 @@ expression (it does not do comparing between data members). So for example if yo
 to get only those objects where member foo = 1, you would write "obj[foo == 1]", more examples later. It supports a
 wide range of evaluations.
 
-- "==" | "=" - compares data member for equality
+- "=" - compares data member for equality (a==b)
+- "==" - compares data member for equality (a===b) 
 - "!=" - compares data member inequality
 - "<" - less than
 - ">" - greater than
@@ -90,7 +103,7 @@ If you have a primitive Array such as array of strings or numbers, you can still
 ##### Ex:
 
     var primitive = ["Sam", "Steve", "John", "Joe"];
-    var result = jpath.filter(primitive, "*[. == Sam]");
+    var result = jpath.select(primitive, "*[. == Sam]");
 
 #### Using reserved words to compare
 
@@ -113,32 +126,18 @@ Working with Arrays requires a special character to reference Array itself in th
 		{name: "Linda", age:30, gender:"female"},
 		{name: "Adam", age:32, gender:"male"}
 	];
-	var match = jpath.filter(people, "*[gender==female]");
+	var match = jpath.select(people, "*[gender==female]");
 	Output:
 	[{name: "Susan", age:22, gender:"female"},{name: "Linda", age:30, gender:"female"}]
 
 API
 ---
-jPath exposes two methods: filter() and select(). select method returns an instance of JPath object that allows you to do alot more then just get results of the pattern match.
-
-### Classes
-
-* JPath
-	* constructor( json ) - initializes JPath instance
-	* data - local copy of json object you passed in during init.
-	* selection - cached result of the selection
-	* from( json ) - this method allows you to change json source
-	* first() - returns the first result value
-	* last() - returns the last result value
-	* eq( index ) - returns result value by index
-	* select( pattern [, custom_compare_function ]) - performs recursive search
-	* and( pattern ) - this method allows combining of multiple search results.
-	* val() - {Array} returns the final value of selection
+jPath exposes two methods: update() and select(). select method returns an instance of JPath object that allows you to do alot more then just get results of the pattern match.
 
 ### Methods
 
 * select( json, expression [,cust_compare_fn] ) - performs a traversal and returns you an instance of JPath object
-* filter( json, expression [,cust_compare_fn] ) - performs a traversal and returns a value
+* update( json, data ) - updates records with the data contained in 'data'
 
 #### More Examples
 
@@ -168,4 +167,4 @@ jPath exposes two methods: filter() and select(). select method returns an insta
 
 5. Using parenteces to group logic
 
-        jPath.filter(obj, "*[(a==b || a == c) && c == d]");
+        jPath.select(obj, "*[(a==b || a == c) && c == d]");
