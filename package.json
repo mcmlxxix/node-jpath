@@ -17,6 +17,6 @@
 		"type": "MIT",
 		"url": "https://github.com/mcmlxxix/node-jpath/LICENSE-MIT"
 	}],
-	"main": "./lib/node-jpath",
+	"main": "./node-jpath",
 	"keywords": ["utility", "xpath", "jpath", "traversal", "objects"]
 }
