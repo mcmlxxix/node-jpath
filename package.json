@@ -1,6 +1,6 @@
 {
 	"name": "node-jpath",
-	"description": "jPath: Traversal utility to help you digg deeper into complex objects or arrays of objects",
+	"description": "jPath: Traversal utility to help you dig deeper into complex objects or arrays of objects",
 	"version": "1.0",
 	"author": {
 		"name": "Matt Johnson",
@@ -15,7 +15,7 @@
 	},
 	"licenses": [{
 		"type": "MIT",
-		"url": "https://github.com/mcmlxxix/node-jpath/LICENSE-MIT"
+		"url": "https://github.com/mcmlxxix/node-jpath/LICENSE"
 	}],
 	"main": "./node-jpath",
 	"keywords": ["utility", "xpath", "jpath", "traversal", "objects"]
